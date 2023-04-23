@@ -15,6 +15,7 @@ public class ChoosingOption {
  * -	How to customize the options to users, e.g. only two options: “Yes” and “No”, OR “I do” and “I don’t” (Suggestion: Use Javadocs or using Eclipse/Netbean IDE help). 
  */
 
- /* - Show up message: "You've chosen: No"
+ /*  Answer:
+  *  - Show up message: "You've chosen: No"
   * - Using YES_NO_OPTION
   */
