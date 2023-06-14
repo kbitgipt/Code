@@ -1,8 +1,0 @@
-Question: After the call of swap(jungleDVD, cinderellaDVD) why does the title of these two objects still remain?
-
-Answer: Since in the swap method, it creates new reference tmp to junngleDVD, then take reference of jungleDVD to cinderellaDVD and take reference of cinderellaDVD to tmp. So the title of these two objects will not be no reference.
-
-
-Question: After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()) why is the title of the JungleDVD changed?
-
-Answer: Since dvd.setTitle(title) modifies directly object "jungleDVD" (dvd points to the same object as "jungleDVD", and when we "create dvd = new DigitalVideoDisc(oldTitle)", it doesn't affect the original jungleDVD object outside the method because "dvd" is a reference to new object.
