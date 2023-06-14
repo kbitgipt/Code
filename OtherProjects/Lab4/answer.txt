@@ -1,0 +1,62 @@
+Question: If the passing object is not an instance of Media, what happens?
+
+Answer: 
+The equals() method will defer to the default behavior of comparing object references. This means that even if the objects have the same attributes or values, the equals() method will return false because the object references are not the same.
+
+
+Question: Alternatively, to compare items in the cart, instead of using Comparator, we can use the Comparable interface and override the compareTo()method. You can refer to the Java docs to see the information of this interface. 
+Suppose we are taking this Comparable interface approach.
+-	What class should implement the Comparable interface?
+-	In those classes, how should you implement the compareTo()method be to reflect the ordering that we want?
+-	Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+-	Suppose the DVDs has a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
+
+Answer:
+- When using the Comparable interface, the class that should implement it is the class representing the objects we want to compare, in this case, the Media class.
+
+- To reflect the desired ordering, I would implement the compareTo() method in the Media class. 
+
+public class Media implements Comparable<Media> {
+    @Override
+    public int compareTo(Media other) {
+        int titleComparison = this.getTitle().compareTo(other.getTitle());
+        if (titleComparison != 0) {
+            return titleComparison;
+        } else {
+            return Float.compare(this.getCost(), other.getCost());
+        }
+    }
+}
+
+- Using the Comparable interface, we can only have one natural ordering rule for the items. If we want to have two different ordering rules (by title then cost and by cost then title), we would need to use the Comparator approach instead.
+
+
+- Now, if the DVDs have a different ordering rule (by title, then decreasing length, then cost), I modify the compareTo() method in the DVD class to accommodate this ordering:
+
+public class DVD extends Media {
+    // DVD class implementation
+
+    @Override```````````````````````````````````````````````````````````````````````````````````````````````
+    public int compareTo(Media other) {
+        if (other instanceof DVD) {
+            DVD otherDVD = (DVD) other;
+            int titleComparison = this.getTitle().compareTo(otherDVD.getTitle());
+            if (titleComparison != 0) {
+                return titleComparison;
+            } else {
+                int lengthComparison = Integer.compare(otherDVD.getLength(), this.getLength());
+                if (lengthComparison != 0) {
+                    return lengthComparison;
+                } else {
+                    return Float.compare(this.getCost(), otherDVD.getCost());
+                }
+            }
+        } else {
+            // Handle comparison with other types of media if needed
+            return super.compareTo(other);
+        }
+    }
+    
+    // Rest of the DVD class implementation
+}
+
